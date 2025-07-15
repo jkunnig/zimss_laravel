@@ -1,10 +1,9 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\PersonController;
-
+use App\Http\Controllers\Api\EmployeeController;
 
 Route::post('/login', [AuthController::class, 'login']);
 
@@ -17,4 +16,9 @@ Route::prefix('persons')->group(function () {
     Route::get('/{id}', [PersonController::class, 'show']);
     Route::post('/', [PersonController::class, 'store']);
     Route::put('/{id}', [PersonController::class, 'update']);
-}); 
+    Route::apiResource('users', App\Http\Controllers\Api\UserController::class);
+});
+
+// ✅ These are outside the prefix so they match Flutter:
+Route::get('/employees', [EmployeeController::class, 'index']);
+Route::post('/employees', [EmployeeController::class, 'store']); // ✅ ADD THIS

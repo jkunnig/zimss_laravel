@@ -41,4 +41,19 @@ class Person extends Model
 
         return str_pad($next, 5, '0', STR_PAD_LEFT);
     }
+
+    public function user()
+    {
+        return $this->hasOne(User::class);
+    }
+
+    public function employee()
+{
+    return $this->hasOne(Employee::class);
+}
+
+public function getFullNameAttribute()
+{
+    return trim("{$this->first_name} {$this->middle_name} {$this->last_name} {$this->suffix}");
+}
 }
